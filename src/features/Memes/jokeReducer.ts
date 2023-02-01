@@ -4,7 +4,7 @@ import {humorApi, ReqType} from "../../api/humor-api";
 import {AppRootStateType} from "../../app/store";
 
 export type CategoryType = 'Programming' | 'Misc' | 'Dark' | 'Pun' | 'Spooky' | 'Christmas' | 'Any'
-type FlagsType = {
+type FlagsDataType = {
     [nsfw:string]: boolean
     religious: boolean
     political: boolean
@@ -12,17 +12,21 @@ type FlagsType = {
     sexist: boolean
     explicit: boolean
 }
-
+export type FlagsType= 'nsfw' | 'religious' |'political' |'racist'|'sexist'| 'explicit'
 type JokeType = {
     error: boolean
-    category: CategoryType[]
+    categoryArray: CategoryType[]
+    category:CategoryType
     joke: string
-    flags: FlagsType
+    flags: FlagsDataType
+    message:string
 }
 
 const initialState:JokeType = {
     error: false,
-    category: ["Any"],
+    message:'',
+    categoryArray: ["Any"],
+    category:'Any',
     joke: '',
     flags: {
         nsfw: false,
@@ -39,31 +43,41 @@ const slice = createSlice({
     initialState,
     reducers: {
         addCategory(state, action: PayloadAction<{ category: CategoryType }>) {
-            state.category=[...state.category,action.payload.category]
-          console.log(state.category)
-
+            if(action.payload.category==='Any'){
+                state.categoryArray=['Any']
+            }else{
+                state.categoryArray=[...state.categoryArray.filter(c=>c!=='Any'),action.payload.category]
+            }
         },
         delCategory(state, action: PayloadAction<{ category: CategoryType }>) {
-            state.category=state.category.filter(c=>c!==action.payload.category)
+            state.categoryArray=state.categoryArray.filter(c=>c!==action.payload.category)
         },
-        setFlags(state, action: PayloadAction<{ flags: FlagsType }>) {
-            state.flags = action.payload.flags
+        setFlags(state, action: PayloadAction<{ flag: FlagsType }>) {
+            state.flags[action.payload.flag] = !state.flags[action.payload.flag]
         }
     },
-    extraReducers: (builder) =>
+    extraReducers: (builder) => {
         builder.addCase(getJoke.fulfilled, (state, action) => {
+            if (action.payload.error) {
+                state.message = action.payload.message
+            } else {
+                state.message = ''
+            }
             state.joke = action.payload.joke
-            state.category=action.payload.category
+            state.category = action.payload.category
         })
-
+        builder.addCase(getJoke.rejected, (state, action) => {
+            state.message=action.payload ? action.payload.error : 'unknown error, please try again later'
+        })
+    }
 })
 
 export const getJoke = createAsyncThunk<JokeType, undefined, { rejectValue: { error: string } }>(
     'jokes/getJoke',
     async (_, {getState, rejectWithValue}) => {
-        const {category,flags} = (getState() as AppRootStateType).joke
+        const {categoryArray,flags} = (getState() as AppRootStateType).joke
         const req: ReqType = {
-            category: category.toString(),
+            category: categoryArray.toString(),
             flags: Object.keys(flags).filter(f=>flags[f]).toString()
         }
         try {

@@ -1,24 +1,47 @@
-.container{
+.container {
     width: 100%;
-    height: 90%;
-    border: 1px solid red;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    gap: 7px;
+    background-color: #1E2442;
 }
-.jokeBlock{
-    margin: 10px;
+
+.jokeBlock {
+    margin: 20px;
+    padding: 15px 20px;
     width: 50%;
     height: 20%;
-    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+    color: white;
+    gap:5px;
 }
-.filterBlock{
+
+.filterBlock {
     width: 90%;
-    height: 20%;
-    border: 1px solid red;
+    height: 10%;
+    margin: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+}
+
+legend {
+    padding: 0 10px;
+    align-items: start;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+img {
+    height: 100%;
 }
