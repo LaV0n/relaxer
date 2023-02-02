@@ -21,15 +21,24 @@ export const Events = () => {
 
     return (
         <div className={styles.container}>
-            <Button onClick={getEventsHandler}> get events</Button>
+            <Button onClick={getEventsHandler}
+                    variant="outlined"
+                    color="inherit"
+                    style={{marginTop:20,color:'white'}}
+            >
+                get events
+            </Button>
             {events.map(e =>
                 <EventShort key={e.id} {...e}/>
             )}
-            <Pagination count={totalPages}
-                        page={page!+1}
-                        onChange={handleChange}
-                        color={'primary'}
-                       />
+                <Pagination count={totalPages}
+                            page={page?page+1:1}
+                            onChange={handleChange}
+                            variant="text"
+                            color={'primary'}
+                            disabled={!totalPages}
+                            className={styles.paginator}
+                />
         </div>
     );
 };

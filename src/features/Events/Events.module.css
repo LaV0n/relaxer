@@ -5,6 +5,10 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 7px;
+    gap: 15px;
     background-color: var(--mainColor);
+}
+.paginator{
+    margin-bottom: 20px;
+    filter: invert(1);
 }

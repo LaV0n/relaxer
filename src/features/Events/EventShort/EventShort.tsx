@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './EventShort.module.css'
 import {EventDataType} from "../EventsReducer";
+import {DataFormat} from "../../../common/utiles/DataFormat";
 
 export const EventShort = ({name,images,dates,_embedded}: EventDataType) => {
     return (
@@ -8,10 +9,11 @@ export const EventShort = ({name,images,dates,_embedded}: EventDataType) => {
             <img src={images[0].url} alt="0"/>
             <div className={styles.description}>
                 <div>{name}</div>
-                <div>{dates.start.localDate}</div>
-                <div>{_embedded.venues[0].city.name}</div>
+                <div>{DataFormat(dates.start.localDate)}</div>
+                <div className={styles.city}>{_embedded.venues[0].city.name}</div>
             </div>
-            <div className={styles.status} style={dates.status.code==='onsale'?{color:'green'}:{color:'red'}}>
+            <div className={styles.status}
+                 style={dates.status.code==='onsale'?{color:'green'}:{color:'red'}}>
                 {dates.status.code}
             </div>
         </div>
