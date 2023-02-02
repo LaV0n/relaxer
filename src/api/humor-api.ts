@@ -1,9 +1,9 @@
-import { instance} from "./instance";
+import { instanceJoke} from "./instance";
 
 
 export const humorApi={
     getJoke({category,flags}:ReqType){
-        return instance.get(`joke/${category}?blacklistFlags=${flags}&type=single`)
+        return instanceJoke.get(`joke/${category}?blacklistFlags=${flags}&type=single`)
     }
 }
 

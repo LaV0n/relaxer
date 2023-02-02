@@ -6,9 +6,8 @@ export const Header = () => {
     return (
         <div className={styles.container}>
             header
-            <NavLink to={'/joke'} >
-                joke
-            </NavLink>
+            <NavLink to={'/joke'} >   joke   </NavLink>
+            <NavLink to={'/'} >   Events   </NavLink>
         </div>
     );
 };
