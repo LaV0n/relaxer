@@ -30,9 +30,9 @@ img {
     align-items: center;
     padding-right: 10px;
 }
-.onsale{
-    color: green;
+
+.paginator{
+    background-color: white;
 }
-.offsale{
-    color: red;
-}
+
+

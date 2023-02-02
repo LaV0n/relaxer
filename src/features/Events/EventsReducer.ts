@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {errorAsString} from "../../common/utiles/errorAsString";
-import {EventsApi} from "../../api/events-api";
+import {EventsApi, FilterDataType} from "../../api/events-api";
 
 export type EventDataType = {
     name:string
@@ -92,11 +92,11 @@ const slice = createSlice({
     }
 })
 
-export const getEvents = createAsyncThunk<ResponseDataType,undefined,{ rejectValue: { error: string } }>(
+export const getEvents = createAsyncThunk<ResponseDataType,FilterDataType,{ rejectValue: { error: string } }>(
     'events/getEvents',
-    async (_, {rejectWithValue}) => {
+    async (filter, {rejectWithValue}) => {
         try {
-            const res = await EventsApi.getEvents()
+            const res = await EventsApi.getEvents(filter)
             return res.data
         } catch (err) {
             const error = errorAsString(err)
