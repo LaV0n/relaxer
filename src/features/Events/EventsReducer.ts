@@ -86,7 +86,7 @@ const initialState:InitialStateType = {
     searchData:{
         keyword:'',
         country:'',
-        city:'Wroclaw',
+        city:'',
         radius:null
     }
 }

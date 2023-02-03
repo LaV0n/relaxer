@@ -10,7 +10,7 @@ export const EventShort = ({name,images,dates,_embedded}: EventDataType) => {
             <div className={styles.description}>
                 <div className={styles.name}>{name}</div>
                 <div>{DataFormat(dates.start.localDate)}</div>
-                <div className={styles.city}>{_embedded.venues[0].city.name}</div>
+                <div className={styles.city}>{_embedded?.venues[0].city.name}</div>
             </div>
             <div className={styles.status}
                  style={dates.status.code==='onsale'?{color:'green'}:{color:'red'}}>
