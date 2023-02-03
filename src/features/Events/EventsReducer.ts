@@ -66,7 +66,7 @@ export type SearchDataType={
     keyword:string
     city:string
     country:string
-    radius:number
+    radius:number | null
 }
 
 type InitialStateType={
@@ -87,7 +87,7 @@ const initialState:InitialStateType = {
         keyword:'',
         country:'',
         city:'Wroclaw',
-        radius:0
+        radius:null
     }
 }
 
@@ -95,18 +95,31 @@ const slice = createSlice({
     name: 'events',
     initialState,
     reducers: {
-        setCity(state,action:PayloadAction<{city:string}>){
-            state.searchData.city=action.payload.city
+        setCity(state,action:PayloadAction<string>){
+            state.searchData.city=action.payload
+        },
+        setKeyword(state,action:PayloadAction<string>){
+            state.searchData.keyword=action.payload
+        },
+        setRadius(state,action:PayloadAction<number>){
+            state.searchData.radius=action.payload
+        },
+        setCountry(state,action:PayloadAction<string>){
+            state.searchData.country=action.payload
         }
     },
     extraReducers:builder => {
         builder.addCase(getEvents.rejected,(state, action)=>{
+            state.data._embedded.events=[]
             state.error=action.payload ? action.payload.error : 'unknown error, please try again later'
         })
         builder.addCase(getEvents.fulfilled,(state, action)=>{
             if(action.payload.page?.totalElements===0){
                 state.error='no match'
+                state.data.page=action.payload.page
+                state.data._embedded.events=[]
             }else{
+                state.error=''
                 state.data=action.payload
             }
 
@@ -128,4 +141,4 @@ export const getEvents = createAsyncThunk<ResponseDataType,FilterDataType,{ reje
 )
 
 export const eventsReducer = slice.reducer
-export const {setCity}=slice.actions
+export const {setCity,setKeyword,setRadius,setCountry}=slice.actions

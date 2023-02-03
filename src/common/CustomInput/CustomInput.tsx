@@ -1,23 +1,38 @@
 import React, { ChangeEvent } from 'react';
 import {Input} from "@mui/material";
-import {useAppDispatch, useAppSelector} from "../../app/store";
-import {setCity} from "../../features/Events/EventsReducer";
+import {useAppDispatch} from "../../app/store";
+import {setCity, setCountry, setKeyword, setRadius} from "../../features/Events/EventsReducer";
 
-export const CustomInput = () => {
+type CustomInputType={
+    value:string | number | null
+    type: 'City' | 'Country' | 'Keyword' | 'Radius'
+}
+
+export const CustomInput = ({value,type}:CustomInputType) => {
 
     const dispatch=useAppDispatch()
-    const city=useAppSelector(state => state.events.searchData.city)
 
     const onChangeHandler=(e:ChangeEvent<HTMLTextAreaElement | HTMLInputElement>)=>{
-        dispatch(setCity({city:e.currentTarget.value}))
+        switch (type){
+            case 'City':
+               return  dispatch(setCity(e.currentTarget.value));
+            case 'Country':
+                return dispatch(setCountry(e.currentTarget.value))
+            case 'Keyword':
+                return  dispatch(setKeyword(e.currentTarget.value))
+            case 'Radius':
+               return  dispatch(setRadius(+e.currentTarget.value))
+            default:
+                return
+        }
     }
 
     return (
         <div>
-            <Input placeholder="City"
+            <Input placeholder={type}
                    color="primary"
                    sx={{color:'white'}}
-                   value={city}
+                   value={value}
                    onChange={onChangeHandler}
             />
         </div>

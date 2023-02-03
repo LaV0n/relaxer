@@ -1,12 +1,15 @@
 .filterBlock{
-    width: 90%;
     padding: 0 10px;
-    height: 10vh;
-    margin-top: 15px;
-    border-radius: 10px;
-    border: 3px solid rgba(249, 249, 249, 0.1);
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
+    margin: 10px auto;
+}
+fieldset{
+    width: 90%;
+    margin-top: 15px;
+    height: 9vh;
+    border-radius: 10px;
+    border: 3px solid rgba(249, 249, 249, 0.1);
 }
