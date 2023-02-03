@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './Events.module.css'
-import {Button, Pagination} from "@mui/material";
+import { Pagination} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../app/store";
 import {getEvents} from './EventsReducer';
 import {EventShort} from './EventShort/EventShort';
+import {SearchBlock} from "./SearchBlock/SearchBlock";
 
 export const Events = () => {
 
@@ -11,26 +12,23 @@ export const Events = () => {
     const events = useAppSelector(state => state.events.data._embedded.events)
     const page = useAppSelector(state => state.events.data.page?.number)
     const totalPages = useAppSelector(state => state.events.data.page?.totalPages)
+    const searchData=useAppSelector(state => state.events.searchData)
 
     const getEventsHandler = () => {
-        dispatch(getEvents({page: 0}))
+        dispatch(getEvents({page: 0,searchData}))
     }
     const handleChange = (event: React.ChangeEvent<unknown>, pageNew: number) => {
-        dispatch(getEvents({page:pageNew-1}))
+        dispatch(getEvents({page:pageNew-1,searchData}))
     }
 
     return (
         <div className={styles.container}>
-            <Button onClick={getEventsHandler}
-                    variant="outlined"
-                    color="inherit"
-                    style={{marginTop:20,color:'white'}}
-            >
-                get events
-            </Button>
-            {events.map(e =>
-                <EventShort key={e.id} {...e}/>
-            )}
+            <SearchBlock getEventsHandler={getEventsHandler}/>
+            <div className={styles.eventsBlock}>
+                {events.map(e =>
+                    <EventShort key={e.id} {...e}/>
+                )}
+            </div>
                 <Pagination count={totalPages}
                             page={page?page+1:1}
                             onChange={handleChange}

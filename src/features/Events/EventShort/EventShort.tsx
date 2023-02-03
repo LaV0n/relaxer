@@ -8,7 +8,7 @@ export const EventShort = ({name,images,dates,_embedded}: EventDataType) => {
         <div className={styles.container}>
             <img src={images[0].url} alt="0"/>
             <div className={styles.description}>
-                <div>{name}</div>
+                <div className={styles.name}>{name}</div>
                 <div>{DataFormat(dates.start.localDate)}</div>
                 <div className={styles.city}>{_embedded.venues[0].city.name}</div>
             </div>

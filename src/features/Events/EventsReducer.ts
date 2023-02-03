@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {errorAsString} from "../../common/utiles/errorAsString";
 import {EventsApi, FilterDataType} from "../../api/events-api";
 
@@ -62,10 +62,17 @@ type ResponseDataType={
     },
     page:PageDataType | null
 }
+export type SearchDataType={
+    keyword:string
+    city:string
+    country:string
+    radius:number
+}
 
 type InitialStateType={
     data:ResponseDataType
     error:string
+    searchData:SearchDataType
 }
 
 const initialState:InitialStateType = {
@@ -76,18 +83,33 @@ const initialState:InitialStateType = {
         page:null
     },
     error:'',
+    searchData:{
+        keyword:'',
+        country:'',
+        city:'Wroclaw',
+        radius:0
+    }
 }
 
 const slice = createSlice({
     name: 'events',
     initialState,
-    reducers: {},
+    reducers: {
+        setCity(state,action:PayloadAction<{city:string}>){
+            state.searchData.city=action.payload.city
+        }
+    },
     extraReducers:builder => {
         builder.addCase(getEvents.rejected,(state, action)=>{
             state.error=action.payload ? action.payload.error : 'unknown error, please try again later'
         })
         builder.addCase(getEvents.fulfilled,(state, action)=>{
-            state.data=action.payload
+            if(action.payload.page?.totalElements===0){
+                state.error='no match'
+            }else{
+                state.data=action.payload
+            }
+
         })
     }
 })
@@ -106,3 +128,4 @@ export const getEvents = createAsyncThunk<ResponseDataType,FilterDataType,{ reje
 )
 
 export const eventsReducer = slice.reducer
+export const {setCity}=slice.actions
