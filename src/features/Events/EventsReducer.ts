@@ -115,14 +115,13 @@ const slice = createSlice({
         })
         builder.addCase(getEvents.fulfilled,(state, action)=>{
             if(action.payload.page?.totalElements===0){
-                state.error='no match'
+                state.error='NO EVENTS'
                 state.data.page=action.payload.page
                 state.data._embedded.events=[]
             }else{
                 state.error=''
                 state.data=action.payload
             }
-
         })
     }
 })

@@ -1,5 +1,5 @@
 .container{
-    height: 8vh;
+    height:10%;
     background-color: var(--headerColor);
     color: var(--textColor);
 }

@@ -33,7 +33,9 @@ export const Events = () => {
                 </div>
             }
             {error &&
-                <div>{error}</div>
+                <div className={styles.errorBlock}>
+                    {error}
+                </div>
             }
                 <Pagination count={totalPages}
                             page={page?page+1:1}

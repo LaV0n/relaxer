@@ -9,7 +9,6 @@
 .filterContainer{
     width: 90%;
     margin-top: 15px;
-    min-height: 9vh;
     border-radius: 10px;
     border: 3px solid rgba(249, 249, 249, 0.1);
 }
