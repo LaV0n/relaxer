@@ -3,6 +3,7 @@ import styles from './SearchBlock.module.css'
 import {Button} from "@mui/material";
 import {CustomInput} from "../../../common/CustomInput/CustomInput";
 import {useAppSelector} from "../../../app/store";
+import {CountryInput} from "../../../common/CountryInput/CountryInput";
 
 type SearchBlockType={
     getEventsHandler:()=>void
@@ -13,15 +14,14 @@ export const SearchBlock = ({getEventsHandler}:SearchBlockType) => {
     const city=useAppSelector(state => state.events.searchData.city)
     const keyword=useAppSelector(state => state.events.searchData.keyword)
     const radius=useAppSelector(state => state.events.searchData.radius)
-    const country=useAppSelector(state => state.events.searchData.country)
 
     return (
-        <fieldset >
+        <fieldset className={styles.filterContainer}>
             <legend>Search filter</legend>
             <div className={styles.filterBlock}>
                 <CustomInput type="Keyword" value={keyword}/>
                 <CustomInput type="City" value={city}/>
-                <CustomInput type="Country" value={country}/>
+                <CountryInput/>
                 <CustomInput type="Radius" value={radius}/>
                 <Button onClick={getEventsHandler}
                         variant="outlined"

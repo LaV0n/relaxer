@@ -1,12 +1,11 @@
 import React, { ChangeEvent } from 'react';
 import {Input} from "@mui/material";
 import {useAppDispatch} from "../../app/store";
-import {setCity, setCountry, setKeyword, setRadius} from "../../features/Events/EventsReducer";
-import {CountryCode} from "../utiles/CountryCode";
+import {setCity,  setKeyword, setRadius} from "../../features/Events/EventsReducer";
 
 type CustomInputType={
     value:string | number | null
-    type: 'City' | 'Country' | 'Keyword' | 'Radius'
+    type: 'City' | 'Keyword' | 'Radius'
 }
 
 export const CustomInput = ({value,type}:CustomInputType) => {
@@ -18,9 +17,6 @@ export const CustomInput = ({value,type}:CustomInputType) => {
         switch (type){
             case 'City':
                return  dispatch(setCity(e.currentTarget.value));
-            case 'Country':
-                let country =e.currentTarget.value
-                return dispatch(setCountry(country))
             case 'Keyword':
                 return  dispatch(setKeyword(e.currentTarget.value))
             case 'Radius':
