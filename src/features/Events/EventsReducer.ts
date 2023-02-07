@@ -72,6 +72,7 @@ export type SearchDataType={
 type InitialStateType={
     data:ResponseDataType
     error:string
+    loading:boolean
     searchData:SearchDataType
 }
 
@@ -83,6 +84,7 @@ const initialState:InitialStateType = {
         page:null
     },
     error:'',
+    loading:false,
     searchData:{
         keyword:'',
         country:'',
@@ -106,6 +108,9 @@ const slice = createSlice({
         },
         setCountry(state,action:PayloadAction<string>){
             state.searchData.country=action.payload
+        },
+        setLoading(state,action:PayloadAction<boolean>){
+            state.loading=action.payload
         }
     },
     extraReducers:builder => {
@@ -128,16 +133,19 @@ const slice = createSlice({
 
 export const getEvents = createAsyncThunk<ResponseDataType,FilterDataType,{ rejectValue: { error: string } }>(
     'events/getEvents',
-    async (filter, {rejectWithValue}) => {
+    async (filter, {dispatch,rejectWithValue}) => {
+        dispatch(setLoading(true))
         try {
             const res = await EventsApi.getEvents(filter)
+            dispatch(setLoading(false))
             return res.data
         } catch (err) {
             const error = errorAsString(err)
+            dispatch(setLoading(false))
             return rejectWithValue({error})
         }
     }
 )
 
 export const eventsReducer = slice.reducer
-export const {setCity,setKeyword,setRadius,setCountry}=slice.actions
+export const {setCity,setKeyword,setRadius,setCountry,setLoading}=slice.actions
