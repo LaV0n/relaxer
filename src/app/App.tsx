@@ -13,7 +13,6 @@ function App() {
                 <Route path={'/joke'} element={<Joke/>}/>
                 <Route path={'/'} element={<Events/>}/>
             </Routes>
-
         </div>
     );
 }

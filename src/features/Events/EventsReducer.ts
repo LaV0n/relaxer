@@ -18,7 +18,7 @@ export type EventDataType = {
     locate: string
     images:[{
         url:string
-        attribution:string
+        height:number
     }]
     priceRanges: [{
         type: string
