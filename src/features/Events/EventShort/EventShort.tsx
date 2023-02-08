@@ -20,7 +20,7 @@ export const EventShort = ({name,images,dates,_embedded,id}: EventDataType) => {
 
     return (
         <div className={styles.container} onClick={handlerOpen}>
-            <img src={images[0].url} alt="0"/>
+            <img src={images[0].url} alt="0" className={styles.imgCover}/>
             <div className={styles.description}>
                 <div className={styles.name}>{name}</div>
                 <div>{DataFormat(dates.start.localDate)}</div>
