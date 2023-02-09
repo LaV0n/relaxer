@@ -14,7 +14,7 @@ export const Events = () => {
     const totalPages = useAppSelector(state => state.events.data.page?.totalPages)
     const searchData = useAppSelector(state => state.events.searchData)
     const error = useAppSelector(state => state.events.error)
-    const isLoading = useAppSelector(state => state.events.loading)
+    const isLoading = useAppSelector(state => state.events.isLoading)
 
     const getEventsHandler = () => {
         dispatch(getEvents({page: 0, searchData}))
@@ -25,10 +25,10 @@ export const Events = () => {
 
     return (
         <div className={styles.container}>
-            <SearchBlock getEventsHandler={getEventsHandler}/>
             {isLoading &&
                 <CircularProgress style={{position:"absolute",top:'200px', zIndex:'3'}}/>
             }
+            <SearchBlock getEventsHandler={getEventsHandler}/>
             {(totalPages !== 0 && totalPages) &&
                 <div className={styles.eventsBlock}>
                     {events.map(e =>
