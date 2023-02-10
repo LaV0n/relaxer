@@ -7,7 +7,6 @@ import {useAppSelector} from "../../../app/store";
 
 export const EventShort = ({name, images, dates, _embedded, id}: EventDataType) => {
 
-
     const [isOpen, setIsOpen] = useState(false)
     const events = useAppSelector(state => state.events.data._embedded.events)
     const currentEvent = events.find(e => e.id === id)
