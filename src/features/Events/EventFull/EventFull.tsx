@@ -20,6 +20,10 @@ export const EventFull = ({isOpen, handleClose, currentEvent}: EventFullType) =>
     return (
         <Modal open={isOpen} onClose={handleClose}>
             <Box className={styles.container}>
+                <button onClick={handleClose}
+                        className={styles.closeButton}>
+                    X
+                </button>
                 <div className={styles.descriptionBlock} style={{backgroundImage: `url(${backGroundImg})`}}>
                     <div className={styles.name}>
                         {currentEvent.name}
@@ -42,13 +46,15 @@ export const EventFull = ({isOpen, handleClose, currentEvent}: EventFullType) =>
                          style={{border: `3px solid ${isOnSale ? 'green' : 'red'}`}}>
                         {currentEvent.dates.status.code}
                     </div>
-                    {currentEvent.priceRanges?.map((p, index) =>
-                        <div className={styles.prices} key={index}>
-                            <div>{p.type}</div>
-                            <div>{p.min} - {p.max} {p.currency}</div>
-                        </div>
-                    )
-                    }
+                    <div className={styles.priceGroup}>
+                        {currentEvent.priceRanges?.map((p, index) =>
+                            <div className={styles.prices} key={index}>
+                                <div>{p.type}</div>
+                                <div>{p.min} - {p.max} {p.currency}</div>
+                            </div>
+                        )
+                        }
+                    </div>
                     <a href={currentEvent.url}>
                         <img src={iconTicket} alt="0" className={styles.ticketIcon}/>
                     </a>
