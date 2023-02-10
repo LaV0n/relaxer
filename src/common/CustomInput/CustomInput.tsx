@@ -30,6 +30,7 @@ export const CustomInput = ({value,type}:CustomInputType) => {
     return (
         <div>
             <Input placeholder={type}
+                   sx={{color:'white'}}
                    color="primary"
                    className={styles.container}
                    value={value?value:''}

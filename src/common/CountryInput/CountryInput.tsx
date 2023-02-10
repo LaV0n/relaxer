@@ -296,7 +296,7 @@ export const CountryInput=()=>{
                     renderValue={(selected) => (
                         <Box className={ styles.boxBlock}>
                             {selected.map((value) => (
-                                <Chip key={value} label={value} className={styles.countryBlock}/>
+                                <Chip key={value} label={value} sx={{color:'white',backgroundColor:'black'}}/>
                             ))}
                         </Box>
                     )}
