@@ -1,0 +1,20 @@
+.formBlock{
+    min-width: 250px;
+}
+.inputLabel{
+    color:rgba(255, 255, 255, 0.4)
+}
+.boxBlock{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.countryBlock{
+    color: white;
+    background-color: black;
+}
+@media screen and (max-width: 1150px){
+    .formBlock{
+       width: 80vw;
+    }
+}

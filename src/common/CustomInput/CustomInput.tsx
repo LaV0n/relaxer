@@ -2,6 +2,7 @@ import React, { ChangeEvent } from 'react';
 import {Input} from "@mui/material";
 import {useAppDispatch} from "../../app/store";
 import {setCity,  setKeyword, setRadius} from "../../features/Events/EventsReducer";
+import styles from './CustomInput.module.css'
 
 type CustomInputType={
     value:string | number | null
@@ -30,7 +31,7 @@ export const CustomInput = ({value,type}:CustomInputType) => {
         <div>
             <Input placeholder={type}
                    color="primary"
-                   sx={{color:'white'}}
+                   className={styles.container}
                    value={value?value:''}
                    onChange={onChangeHandler}
             />

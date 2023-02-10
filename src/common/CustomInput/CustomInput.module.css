@@ -1,0 +1,8 @@
+.container{
+    color: white;
+}
+@media screen and (max-width: 1150px){
+    .container{
+       width: 80vw;
+    }
+}

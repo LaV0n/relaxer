@@ -2,6 +2,7 @@ import {Box, Chip, FormControl, InputLabel, MenuItem, OutlinedInput, Select, Sel
 import React, {useEffect, useState} from "react";
 import {useAppDispatch} from "../../app/store";
 import {setCountry} from "../../features/Events/EventsReducer";
+import styles from './CountryInput.module.css'
 
 export const CountryInput=()=>{
 
@@ -283,8 +284,8 @@ export const CountryInput=()=>{
 
     return(
         <div>
-            <FormControl sx={{ minWidth: 250 }}>
-                <InputLabel id="multiple-chip-label" sx={{color:'rgba(255, 255, 255, 0.4)'}}>Country</InputLabel>
+            <FormControl className={styles.formBlock}>
+                <InputLabel id="multiple-chip-label" className={styles.inputLabel}>Country</InputLabel>
                 <Select
                     labelId="multiple-chip-label"
                     id="multiple-chip"
@@ -293,9 +294,9 @@ export const CountryInput=()=>{
                     onChange={handleChange}
                     input={<OutlinedInput id="select-multiple-chip" label="Country" />}
                     renderValue={(selected) => (
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                        <Box className={ styles.boxBlock}>
                             {selected.map((value) => (
-                                <Chip key={value} label={value} sx={{color:'white',backgroundColor:'black'}}/>
+                                <Chip key={value} label={value} className={styles.countryBlock}/>
                             ))}
                         </Box>
                     )}
