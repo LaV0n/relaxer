@@ -2,4 +2,27 @@
     height:10%;
     background-color: var(--headerColor);
     color: var(--textColor);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 30px;
+    align-items: center;
+}
+.logoImg{
+    height: 70%;
+   margin: 1rem;
+}
+.link{
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(249, 249, 249, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    width: 10rem;
+    text-align: center;
+}
+.link:hover{
+    color: var(--textColor);
+    border: 2px solid rgba(249, 249, 249, 0.5);
+    width: calc( 10rem - 2px);
 }
