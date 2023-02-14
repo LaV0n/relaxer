@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './Events.module.css'
 import {CircularProgress, Pagination} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../app/store";
-import {getEvents} from './EventsReducer';
+import {getEvents, SearchDataType, setCity, setCountry, setKeyword, setRadius} from './EventsReducer';
 import {EventShort} from './EventShort/EventShort';
 import {SearchBlock} from "./SearchBlock/SearchBlock";
 
@@ -18,10 +18,24 @@ export const Events = () => {
 
     const getEventsHandler = () => {
         dispatch(getEvents({page: 0, searchData}))
+        localStorage.setItem('searchData',JSON.stringify(searchData))
     }
     const handleChange = (event: React.ChangeEvent<unknown>, pageNew: number) => {
         dispatch(getEvents({page: pageNew - 1, searchData}))
     }
+
+    useEffect(()=>{
+        let searchDataSave=localStorage.getItem('searchData')
+        if (searchDataSave){
+            let searchDataSaveNew: SearchDataType=JSON.parse(searchDataSave)
+            dispatch(setKeyword(searchDataSaveNew.keyword))
+            dispatch(setCity(searchDataSaveNew.city))
+            if(searchDataSaveNew.radius){
+                dispatch(setRadius(searchDataSaveNew.radius))
+            }
+            dispatch(setCountry(searchDataSaveNew.country))
+            }
+    },[])
 
     return (
         <div className={styles.container}>

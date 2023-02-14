@@ -111,6 +111,14 @@ const slice = createSlice({
         },
         setIsLoading(state,action:PayloadAction<boolean>){
             state.isLoading=action.payload
+        },
+        resetFilters(state){
+            state.searchData={
+                keyword:'',
+                country:'',
+                city:'',
+                radius:null
+            }
         }
     },
     extraReducers:builder => {
@@ -148,4 +156,4 @@ export const getEvents = createAsyncThunk<ResponseDataType,FilterDataType,{ reje
 )
 
 export const eventsReducer = slice.reducer
-export const {setCity,setKeyword,setRadius,setCountry,setIsLoading}=slice.actions
+export const {setCity,setKeyword,setRadius,setCountry,setIsLoading,resetFilters}=slice.actions

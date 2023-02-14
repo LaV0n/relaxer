@@ -1,6 +1,6 @@
 import {Box, Chip, FormControl, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent} from "@mui/material"
 import React, {useEffect, useState} from "react";
-import {useAppDispatch} from "../../app/store";
+import {useAppDispatch, useAppSelector} from "../../app/store";
 import {setCountry} from "../../features/Events/EventsReducer";
 import styles from './CountryInput.module.css'
 
@@ -256,6 +256,7 @@ export const CountryInput=()=>{
         'Češka': 'CZ'
     }
     const dispatch=useAppDispatch()
+    const country = useAppSelector(state => state.events.searchData.country)
 
     const ITEM_HEIGHT = 30;
     const ITEM_PADDING_TOP = 2;
@@ -277,6 +278,14 @@ export const CountryInput=()=>{
             typeof value === 'string' ? value.split(',') : value,
         );
     };
+
+    useEffect(()=>{
+        if (country){
+            setPersonName(Object.keys(countryList).filter(c=> country.split(',').includes(countryList[c as keyof typeof countryList])))
+        }else{
+            setPersonName([])
+        }
+    },[country])
 
     useEffect(()=>{
         dispatch(setCountry(personName.map(c=>countryList[c as keyof typeof countryList]).join(',')))
