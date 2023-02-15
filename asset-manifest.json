@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/relaxer/static/css/main.3630c8b9.css",
+    "main.js": "/relaxer/static/js/main.0a2ea97c.js",
+    "static/js/787.9aaafe33.chunk.js": "/relaxer/static/js/787.9aaafe33.chunk.js",
+    "static/media/10368_2.jpg": "/relaxer/static/media/10368_2.95d9ae48068ef3d3da2e.jpg",
+    "index.html": "/relaxer/index.html",
+    "main.3630c8b9.css.map": "/relaxer/static/css/main.3630c8b9.css.map",
+    "main.0a2ea97c.js.map": "/relaxer/static/js/main.0a2ea97c.js.map",
+    "787.9aaafe33.chunk.js.map": "/relaxer/static/js/787.9aaafe33.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3630c8b9.css",
+    "static/js/main.0a2ea97c.js"
+  ]
+}
