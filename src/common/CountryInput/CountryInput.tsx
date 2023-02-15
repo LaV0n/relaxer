@@ -294,7 +294,7 @@ export const CountryInput=()=>{
     return(
         <div>
             <FormControl className={styles.formBlock}>
-                <InputLabel id="multiple-chip-label" className={styles.inputLabel}>Country</InputLabel>
+                <InputLabel id="multiple-chip-label" sx={{color:'rgba(255, 255, 255, 0.4)'}}>Country</InputLabel>
                 <Select
                     labelId="multiple-chip-label"
                     id="multiple-chip"

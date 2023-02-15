@@ -1,9 +1,6 @@
 .formBlock{
     width: 250px;
 }
-.inputLabel{
-    color:rgba(255, 255, 255, 0.4)
-}
 .boxBlock{
     display: flex;
     flex-wrap: wrap;
